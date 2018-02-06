@@ -1,0 +1,3 @@
+1. Complete the code in main.py, use sublime to check to syntax error
+2. Copy main.py to the pyborad drive in windows explorer
+3. Restart the pyboard,make sure the main.py is the updated one
