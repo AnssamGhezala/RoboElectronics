@@ -2,7 +2,7 @@ from pyb import Pin,LED,ADC #import the libraries we need
 import pyb
 
 #API/Guide
-#https://docs.micropython.org/en/latest/pyboard/pyboard/quickref.html
+#http://docs.micropython.org/en/latest/pyboard/pyboard/quickref.html
 
 
 ## You need to setup the touch sensor using ADC here
