@@ -1,5 +1,4 @@
 import json
-import threading
 import gpiozero
 import time
 from gpiozero.pins.pigpio import PiGPIOFactory
@@ -10,14 +9,10 @@ factory = PiGPIOFactory()
 
 # Define Motor Configuration
 # Used for controlling forwards and backwards.
-# m1_f = gpiozero.OutputDevice(14)
-# m1_b = gpiozero.OutputDevice(15)
-# m2_f = gpiozero.OutputDevice(23)
-# m2_b = gpiozero.OutputDevice(24)
-
 motor_1 = gpiozero.Motor(15, 14,pwm=False,pin_factory=factory)
 # Used for controlling direction.
 motor_2 = gpiozero.Motor(23, 24,pwm=False, pin_factory=factory)
+
 speed = 0.5
 pwm = gpiozero.PWMOutputDevice(3,initial_value=speed, pin_factory=factory)
 
@@ -28,7 +23,6 @@ api = Api(app)
 
 speed = 0.5
 
-command = 'stop'
 # Application routing.
 @app.route('/', methods=['GET'])
 def index():
@@ -38,11 +32,10 @@ def index():
 def set_speed():
     speed = float(request.args.get('speed'))
     print(speed)
-    if(speed > 1):
+    if(speed > 1 or speed < 0):
         abort(400)
     else:
         pwm._write(speed)
-        _control_motor(command)
         return "set"
 
 
